@@ -4,7 +4,6 @@ import { API_BASE_URL } from '../config/config';
 class HttpService {
     constructor(clientConfig = []) {
         this.client = axios.create(clientConfig);
-
     }
 
     attachHeaders = (headers = []) => {
@@ -17,7 +16,7 @@ class HttpService {
 }
 
 const clientConfig = {
-    baseUrl: API_BASE_URL,
+    baseURL: API_BASE_URL,
 }
 
 export default new HttpService(clientConfig);

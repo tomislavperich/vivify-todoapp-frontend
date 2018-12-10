@@ -1,4 +1,13 @@
 .tasklist {
+    display: block;
+    position: absolute;
     background-color: white;
     width: 70vw;
+}
+
+.tasklist-item {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
