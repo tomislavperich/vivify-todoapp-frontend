@@ -1,19 +1,10 @@
 import BaseApiService from './BaseApiService';
-import { API_BASE_URL } from '../config/config';
 
-export class LoginService extends BaseApiService {
-    // constructor(props) {
-    //     super(props);
-    // }
-
+class LoginService extends BaseApiService {
     logIn(props) {
         const { email, password } = props;
-
-        console.log(email, password);
-        return this.apiClient.post(`http://${API_BASE_URL}/api/auth/login`, { email, password })
+        return this.apiClient.post(`/api/auth/login`, { email, password })
             .then(res => {
-                console.log('Success!');
-                console.log(res.data.access_token);
                 this.http.attachHeaders({
                     'Authorization': `Bearer ${res.data.access_token}`
                 });
@@ -38,5 +29,4 @@ export class LoginService extends BaseApiService {
     }
 }
 
-const ls = new LoginService();
-export default ls;
+export default new LoginService();

@@ -1,4 +1,31 @@
 .tasklist {
+    display: block;
+    position: absolute;
     background-color: white;
     width: 70vw;
+    margin: 50px 0 !important;
+}
+
+.tasklist-item {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.task-option {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-edit {
+    margin: 0 10px;
+    color: orange !important;
+
+    &:hover {
+        color: white !important;
+        background-color: orange !important;
+        border-color: orange !important;
+    }
 }

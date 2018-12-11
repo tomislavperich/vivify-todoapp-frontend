@@ -1,48 +1,69 @@
 import BaseApiService from './BaseApiService';
-import { API_BASE_URL } from '../config/config';
-// import LoginService from './LoginService';
 
-export class TaskService extends BaseApiService {
-    // constructor(props) {
-    //     super(props);
-    // }
-
-    // logIn(props) {
-    //     const { email, password } = props;
-
-    //     console.log(email, password);
-    //     return this.apiClient.post(`http://${API_BASE_URL}/api/auth/login`, { email, password })
-    //         .then(res => {
-    //             console.log('Success!');
-    //             console.log(res.data.access_token);
-    //             this.http.attachHeaders({
-    //                 'Authorization': `Bearer ${res.data.access_token}`
-    //             });
-    //             this.setToken(res.data.access_token);
-    //             return res.data;
-    //         }).catch(err => {
-    //             throw err;
-    //         });
-    // }
-
-    // logOut() {
-    //     this.http.removeHeaders();
-    //     localStorage.removeItem('token');
-    // }
-
+class TaskService extends BaseApiService {
     getTasks(token) {
-        return this.apiClient.get(`http://${API_BASE_URL}/api/task`, { token })
+        return this.apiClient.get(`/api/task`, { token })
             .then(res => {
-                console.log(res.data);
                 return res.data;
             }).catch(err => {
                 throw err;
             });
-        // console.log(this.http.client.get('Authorization'));
-
     }
     
+    createTask(token, name, desc, priority) {
+        var task = this.parseTask({ token, name, desc, priority });
+
+        return this.apiClient.post(`/api/task`, task)
+            .then(res => {
+                return res.data;
+            }).catch(err => {
+                throw err;
+            });
+    }
+
+    updateTask(token, task_id, name, desc, priority) {
+        var task = this.parseTask({ token, name, desc, priority });
+        
+        return this.apiClient.put(`/api/task/edit/${task_id}`, task)
+            .then(res => {
+                return res.data;
+            }).catch(err => {
+                throw err;
+            });
+    }
+
+    deleteTask(token, task_id) {
+        return this.apiClient.put(`/api/task/delete/${task_id}`, { token })
+            .then(res => {
+                return res.data;
+            }).catch(err => {
+                throw err;
+            });
+    }
+
+    parseTask = (task) => {
+        // Convert priority to int equivalent
+        var newPriority;
+        switch (task.priority) {
+            case 'low':
+                newPriority = 0;
+                break;
+            case 'medium':
+                newPriority = 1;
+                break;
+            case 'high':
+                newPriority = 2;
+                break;
+            case 'urgent':
+                newPriority = 3;
+                break;
+            default:
+                newPriority = 0;
+        }
+
+        task.priority = newPriority;
+        return task;
+    }
 }
 
-const ts = new TaskService();
-export default ts;
+export default new TaskService();
