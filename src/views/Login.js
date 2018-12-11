@@ -31,10 +31,6 @@ class Login extends Component {
     });
   };
 
-  handleRemembmerMe = e => {
-    console.log('Clicked');
-  };
-
   handleSubmit = e => {
     const credentials = {
       email: this.state.email,
@@ -93,11 +89,6 @@ class Login extends Component {
             onChange={this.onPassChange}
             value={this.state.pass}
           />
-        </div>
-        <div className="form-item">
-          <Checkbox name="remember_me" onClick={this.handleRemembmerMe}>
-            Remember me
-          </Checkbox>
         </div>
         <div className="form-item">
           <Button type="primary" onClick={this.handleSubmit}>
