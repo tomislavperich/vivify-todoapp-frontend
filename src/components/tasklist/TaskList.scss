@@ -3,6 +3,7 @@
     position: absolute;
     background-color: white;
     width: 70vw;
+    margin: 50px 0 !important;
 }
 
 .tasklist-item {
@@ -10,4 +11,10 @@
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: flex-start;
+}
+
+.task-option {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
 }
