@@ -18,6 +18,15 @@ class TaskService extends BaseApiService {
                 throw err;
             });
     }
+
+    deleteTask(token, task_id) {
+        return this.apiClient.put(`/api/task/delete/${task_id}`, { token })
+            .then(res => {
+                return res.data;
+            }).catch(err => {
+                throw err;
+            });
+    }
 }
 
 export default new TaskService();
