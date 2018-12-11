@@ -21,7 +21,7 @@ export default class Home extends Component {
     }
 
     componentDidMount = () => {
-        const token = LoginService.getToken();
+        var token = LoginService.getToken();
         if (token) {
             // Get tasks
             TaskService.getTasks(token)

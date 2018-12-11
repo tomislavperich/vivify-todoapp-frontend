@@ -25,9 +25,7 @@ class LoginService extends BaseApiService {
     }
 
     getToken() {
-        var g =  localStorage.getItem('token'); 
-        console.log(g);
-        return g;
+        return localStorage.getItem('token'); 
     }
 
     setHeaders() {

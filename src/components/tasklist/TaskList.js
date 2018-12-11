@@ -47,7 +47,6 @@ class TaskList extends Component {
   handleTaskToggle = id => {
     var token = LoginService.getToken();
     var tasks = this.state.tasks;
-    var newToggle;
     tasks.forEach(task => {
       if(task.id === id) {
         task.is_checked = !task.is_checked;

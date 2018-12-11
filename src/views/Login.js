@@ -38,12 +38,11 @@ class Login extends Component {
     };
 
     LoginService.logIn(credentials)
-      .then(res => {
+      .then(() => {
         // Redirect
         this.props.updateLogin();
         this.props.history.push('/');
-      })
-      .catch(err => {
+      }).catch(err => {
         var msg;
         switch (err.response.status) {
           case 401:
