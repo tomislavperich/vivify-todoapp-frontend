@@ -21,9 +21,9 @@ class TaskService extends BaseApiService {
             });
     }
 
-    updateTask(token, task_id, name, desc, priority) {
-        var task = this.parseTask({ token, name, desc, priority });
-        
+    updateTask(token, task_id, name, desc, priority, is_checked) {
+        var task = this.parseTask({ token, name, desc, priority, is_checked });
+
         return this.apiClient.put(`/api/task/edit/${task_id}`, task)
             .then(res => {
                 return res.data;

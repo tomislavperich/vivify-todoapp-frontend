@@ -25,7 +25,13 @@ class LoginService extends BaseApiService {
     }
 
     getToken() {
-        return localStorage.getItem('token');
+        return localStorage.getItem('token'); 
+    }
+
+    setHeaders() {
+        this.http.attachHeaders({
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        });
     }
 }
 

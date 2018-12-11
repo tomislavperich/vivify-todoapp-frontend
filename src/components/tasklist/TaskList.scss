@@ -6,11 +6,23 @@
     margin: 50px 0 !important;
 }
 
+.tasklist-item-wrapper {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 .tasklist-item {
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: flex-start;
+    font-size: 1em !important;
+    color: white;
+
+    * {
+        color: white !important;
+    }
 }
 
 .task-option {
@@ -28,4 +40,24 @@
         background-color: orange !important;
         border-color: orange !important;
     }
+}
+
+.task-checked {
+    text-decoration: line-through;
+}
+
+.priority-0 {
+    background-color: #03A9F4;
+}
+
+.priority-1 {
+    background-color: #8BC34A;
+}
+
+.priority-2 {
+    background-color: #FF9800;
+}
+
+.priority-3 {
+    background-color: #FF5722;
 }
