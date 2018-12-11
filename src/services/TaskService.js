@@ -11,7 +11,20 @@ class TaskService extends BaseApiService {
     }
     
     createTask(token, name, desc, priority) {
-        return this.apiClient.post(`/api/task`, { token, name, desc, priority })
+        var task = this.parseTask({ token, name, desc, priority });
+
+        return this.apiClient.post(`/api/task`, task)
+            .then(res => {
+                return res.data;
+            }).catch(err => {
+                throw err;
+            });
+    }
+
+    updateTask(token, task_id, name, desc, priority) {
+        var task = this.parseTask({ token, name, desc, priority });
+        
+        return this.apiClient.put(`/api/task/edit/${task_id}`, task)
             .then(res => {
                 return res.data;
             }).catch(err => {
@@ -26,6 +39,30 @@ class TaskService extends BaseApiService {
             }).catch(err => {
                 throw err;
             });
+    }
+
+    parseTask = (task) => {
+        // Convert priority to int equivalent
+        var newPriority;
+        switch (task.priority) {
+            case 'low':
+                newPriority = 0;
+                break;
+            case 'medium':
+                newPriority = 1;
+                break;
+            case 'high':
+                newPriority = 2;
+                break;
+            case 'urgent':
+                newPriority = 3;
+                break;
+            default:
+                newPriority = 0;
+        }
+
+        task.priority = newPriority;
+        return task;
     }
 }
 

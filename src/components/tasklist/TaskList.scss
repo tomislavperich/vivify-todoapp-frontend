@@ -18,3 +18,14 @@
     justify-content: center;
     align-items: center;
 }
+
+.task-edit {
+    margin: 0 10px;
+    color: orange !important;
+
+    &:hover {
+        color: white !important;
+        background-color: orange !important;
+        border-color: orange !important;
+    }
+}

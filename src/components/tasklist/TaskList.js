@@ -1,16 +1,17 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 import { List, Button } from 'antd';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import LoginService from '../../services/LoginService';
 import TaskService from '../../services/TaskService';
 import './TaskList.scss';
 
 // Fontawesome icons library
-library.add(faTrashAlt);
+library.add(faTrashAlt, faEdit);
 
-export default class TaskList extends Component {
+class TaskList extends Component {
   constructor(props) {
     super(props);
 
@@ -60,7 +61,17 @@ export default class TaskList extends Component {
                   description={item.desc}
                 />
                 <Button 
-                  className="task-option" 
+                  className="task-option task-edit" 
+                  type="danger"
+                  onClick={() => this.props.history.push({
+                    pathname: '/edit',
+                    task: item
+                  })}
+                >
+                  <FontAwesomeIcon icon="edit" />
+                </Button>
+                <Button 
+                  className="task-option task-delete" 
                   type="danger"
                   onClick={() => this.handleDelete(item.id)}
                 >
@@ -74,3 +85,5 @@ export default class TaskList extends Component {
     )
   }
 }
+
+export default withRouter(TaskList);
