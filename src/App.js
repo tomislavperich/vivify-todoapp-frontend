@@ -13,14 +13,12 @@ class App extends Component {
     super();
 
     var token = LoginService.getToken();
-
     this.state = {
-      isLoggedIn: Boolean(token),
-    }
+      isLoggedIn: Boolean(token)
+    };
   }
 
   updateLogin() {
-    console.log('Function ran');
     this.setState({isLoggedIn: !this.state.isLoggedIn})
   }
 

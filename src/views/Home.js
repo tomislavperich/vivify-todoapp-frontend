@@ -17,26 +17,24 @@ export default class Home extends Component {
                 isShown: false,
                 msg: ''
             }
-        }
+        };
     }
 
     componentDidMount = () => {
         const token = LoginService.getToken();
-        console.log(token);
         if (token) {
             // Get tasks
             TaskService.getTasks(token)
                 .then(tasks => {
-                    console.log(tasks)
                     this.setState({
                         tasks: tasks,
                         isLoaded: true
-                    })
+                    });
                 }).catch(err => {
                     this.setState({
                         error: {
                             isShown: true,
-                            msg: err.message,
+                            msg: err.message
                         }
                     });
                 });
@@ -54,8 +52,8 @@ export default class Home extends Component {
             <Button type="primary">Add New</Button>
         </Link>
 
-        { this.state.isLoaded ? <TaskList tasks={this.state.tasks} /> : 'Loading...'}
-        { this.state.error.isShown ? <h1 style={{color: 'red'}}>{this.state.error.msg}</h1> : '' }
+        { this.state.isLoaded ? <TaskList tasks={this.state.tasks} /> : 'Loading...' }
+        { this.state.error.isShown && <h1 style={{color: 'red'}}>{this.state.error.msg}</h1> }
       </div>
     )
   }

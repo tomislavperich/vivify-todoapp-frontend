@@ -5,11 +5,17 @@ import TaskService from '../services/TaskService';
 
 const Option = Select.Option;
 
-function handleChange(value) {
-  console.log(`selected ${value}`);
-}
-
 export default class NewTask extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            name: '',
+            desc: '',
+            priority: 0,
+        }
+    }
+
     onNameChange = e => {
         this.setState({
             name: e.target.value,
