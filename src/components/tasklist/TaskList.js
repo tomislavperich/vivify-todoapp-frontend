@@ -44,19 +44,54 @@ class TaskList extends Component {
     }
   }
 
+  handleTaskToggle = id => {
+    var token = LoginService.getToken();
+    var tasks = this.state.tasks;
+    var newToggle;
+    tasks.forEach(task => {
+      if(task.id === id) {
+        task.is_checked = !task.is_checked;
+        this.setState(prevState => ({
+          ...prevState,
+          tasks: tasks
+        }));
+        
+        TaskService.updateTask(
+          token, 
+          task.id,
+          task.name,
+          task.desc,
+          task.priority,
+          task.is_checked
+        ).catch(err => {
+            this.setState({
+                error: {
+                    isShown: true,
+                    msg: err.message
+                }
+            })
+        });
+      }
+    });
+  }
+
   render() {
     return (
       <Fragment>
         { this.state.error.isShown ? (<h1>{this.state.err}</h1>) : (
           <List
             className="tasklist"
-            header={<div>Low priority</div>}
+            header={<div>Task list</div>}
             bordered
             dataSource={this.state.tasks}
             renderItem={item => (
-              <List.Item>
+              <List.Item 
+                className={ "tasklist-item-wrapper " + 'priority-' + (item.priority) }
+                onClick={() => {this.handleTaskToggle(item.id)}}
+                checked={item.is_checked}
+              >
                 <List.Item.Meta 
-                  className="tasklist-item"
+                  className={ "tasklist-item " + (item.is_checked && 'task-checked ') }
                   title={item.name}
                   description={item.desc}
                 />

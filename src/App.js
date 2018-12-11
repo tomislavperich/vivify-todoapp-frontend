@@ -12,10 +12,12 @@ class App extends Component {
   constructor() {
     super();
 
-    var token = LoginService.getToken();
-    this.state = {
-      isLoggedIn: Boolean(token)
-    };
+    if(!!LoginService.getToken()) {
+      this.state = {
+        isLoggedIn: true
+      };
+      LoginService.setHeaders();
+    }
   }
 
   updateLogin() {
