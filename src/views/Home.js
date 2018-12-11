@@ -26,6 +26,10 @@ export default class Home extends Component {
             // Get tasks
             TaskService.getTasks(token)
                 .then(tasks => {
+                    // Update homepage with created task if exists
+                    if (this.props.location.task) {
+                        tasks.push(this.props.location.task);
+                    }
                     this.setState({
                         tasks: tasks,
                         isLoaded: true
@@ -38,7 +42,6 @@ export default class Home extends Component {
                         }
                     });
                 });
-
         } else {
             // Redirect to login
             this.props.history.push('/login');

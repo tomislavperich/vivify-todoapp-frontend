@@ -5,7 +5,7 @@ import LoginService from './services/LoginService';
 import Navbar from './components/navbar/Navbar';
 import Home from './views/Home';
 import Login from './views/Login';
-import NewTask from './views/NewTask';
+import EditCreateTask from './views/EditCreateTask';
 import './styles/App.scss';
 
 class App extends Component {
@@ -30,7 +30,8 @@ class App extends Component {
             <Navbar isLoggedIn={this.state.isLoggedIn} updateLogin={() => this.updateLogin()} />
             <Route exact path="/" component={Home} />
             <Route path="/login" component={() => <Login updateLogin={() => this.updateLogin()} />} />
-            <Route path="/new" component={NewTask} />
+            <Route path="/new" component={EditCreateTask} />
+            <Route path="/edit" component={EditCreateTask} />
           </Fragment>
         </Router>
       </div>
