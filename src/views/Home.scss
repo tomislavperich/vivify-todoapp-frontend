@@ -1,0 +1,15 @@
+.homepage {
+    display: flex;
+    position: absolute;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    top: 70px;
+}
+
+.btn-new-task {
+    position: fixed !important;
+    left: 40px;
+    top: 100px;
+    z-index: 99;
+}

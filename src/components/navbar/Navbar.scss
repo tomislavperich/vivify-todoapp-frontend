@@ -1,0 +1,29 @@
+.navbar {
+    display: flex;
+    flex-flow: row nowrap;
+    position: fixed;
+    background-color: #eee;
+    width: 100vw;
+    height: 70px;
+    top: 0;
+    z-index: 99;
+
+    .nav-left {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .nav-right {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .link {
+        padding: 10px 20px;
+        transition: background-color 200ms ease;
+    }
+}

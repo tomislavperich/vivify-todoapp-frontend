@@ -1,25 +1,38 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import LoginService from './services/LoginService';
+import Navbar from './components/navbar/Navbar';
+import Home from './views/Home';
+import Login from './views/Login';
+import NewTask from './views/NewTask';
+import './styles/App.scss';
 
 class App extends Component {
+  constructor() {
+    super();
+
+    var token = LoginService.getToken();
+    this.state = {
+      isLoggedIn: Boolean(token)
+    };
+  }
+
+  updateLogin() {
+    this.setState({isLoggedIn: !this.state.isLoggedIn})
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Router>
+          <Fragment>
+            <Navbar isLoggedIn={this.state.isLoggedIn} updateLogin={() => this.updateLogin()} />
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={() => <Login updateLogin={() => this.updateLogin()} />} />
+            <Route path="/new" component={NewTask} />
+          </Fragment>
+        </Router>
       </div>
     );
   }
